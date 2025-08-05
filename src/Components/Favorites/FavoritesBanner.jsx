@@ -30,7 +30,14 @@ export default function FavoritesBanner() {
   return (
     <div className="favorites__banner" style={{ position: 'relative' }}>
       <div className="gradient__overlay"></div>
-      <video ref={videoRef} autoPlay muted={isMuted} loop>
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="header__banner-video"
+      >
         <source src={BannerFavorit} type="video/mp4" />
       </video>
       <div className="volume-control">

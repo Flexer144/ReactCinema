@@ -11,12 +11,13 @@ export default function MainInfoTop(props){
             <p title={dataFilm.title}>{dataFilm.title}</p>
         </div>
         <div className="main__info-left-categoryes">
-
-            {
-              dataFilm.categoryes.map((value, index)=>(
-                <p title={value} key={index}>{value}</p>
-              ))
-            }
+            <div className="category-movie">
+              {
+                dataFilm.categoryes.map((value, index)=>(
+                  <p title={value} key={index}>{value}</p>
+                ))
+              }
+            </div>
             <Rating />
         </div>
         <div title={dataFilm.description} className="main__info-left-about">

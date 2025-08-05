@@ -3,21 +3,18 @@ import background from '../../assets/background.jpg'
 import {Link} from "react-router-dom"
 
 export default function Banner(){
-
+const test='https://kinoflex.ru/media/backdrops/uzhasaiushchii3-15275f62b07911ef8c05ac1f6bb935e8.jpg'
   return(
     <div className="header__banner">
-      <div>
-          <p>REACT CINEMA</p>
-          <p>Subheading that sets up context, shares more info about the website, or generally gets people psyched to keep scrolling. </p>
-          <div>
-              <a className='movies-button' href="#categoryes">Movies</a>
-              <Link to="/favorites" className='favorites-button'><button>Favorites</button></Link>
+          <div className='banner-button'>
+            <div className="baner-button-play">
+              <img className='play-img' width="25" height="25" src="https://img.icons8.com/ios-filled/50/FFFFFF/play--v1.png"/>
+              <Link to="/favorites" className='favorites-button'><button>Смотреть фильм</button></Link>
+            </div>
+            <a className='movies-button' href="#categoryes">О фильме</a>
           </div>
-      </div>
-      <video autoPlay muted loop>
-          <source src={video} type="video/mp4" />
-      </video>
-      <img src={background} alt="" />
+      <img src={test} alt="" />
+
     </div>
   )
 }

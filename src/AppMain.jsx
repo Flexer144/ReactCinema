@@ -9,6 +9,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchFilm } from './Redux/slices/movieSlice.js'
+import { Navigate } from 'react-router-dom'
 
 function AppMain() { 
   const dispatch = useDispatch()
@@ -17,11 +18,12 @@ function AppMain() {
   },[])
 
   return (
-    <>
-      <BrowserRouter>
+    <>            
+      <BrowserRouter basename='/ReactCinema'>
         <Header />
           <Routes>
-              <Route path='/' element={<Home />} />
+              <Route path='/' element={<Navigate to="/home" />} />
+              <Route path='/home' element={<Home />} />
               <Route path='/favorites' element={<Favorites />} />
               <Route path='/movie/:id' element={<Movie />} />
               <Route path='*' element={<NotFound />} />

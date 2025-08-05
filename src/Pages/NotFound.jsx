@@ -14,7 +14,7 @@ export default function NotFound(){
             которая раннее была удаленой или даже никогда не 
             существовала.
           </p>
-          <Link to="/"><button> <img src={iconHome}/> На главную</button></Link>
+          <Link to="/home"><button> <img src={iconHome}/> На главную</button></Link>
         </div>
         <div className="not-found__right">
           <h1>404</h1>
