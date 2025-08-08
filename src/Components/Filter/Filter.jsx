@@ -8,7 +8,6 @@ export default function Filter(){
     <div className="filter">
         <FilterCategoryes />
         <FilterButtons />
-        <FilterSearch />
     </div>
   )
 }

@@ -1,16 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { searchSelectedMovie } from '../../Redux/slices/movieSlice';
 import { searchFavoriteMovie } from '../../Redux/slices/favoriteSlice';
 import { useLocation } from 'react-router-dom';
 
-export default function FilterSearch(){
-
+export default function FilterSearch(bul){
+  const [searchOpen, setSearchOpen] = useState(false)
   const dispatch = useDispatch()
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTermF, setSearchTermF] = useState("");
   const { filteredMovie } = useSelector(store => store.movies)
   const location = useLocation()
+  const containerRef = useRef(null)
+
+  const toggleSearch = () => setSearchOpen(prev => !prev)
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setSearchOpen(false)
+      }
+    }
+    if (searchOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [searchOpen])
 
   //Поиск по основным фильмам
   useEffect(() => {
@@ -31,15 +47,13 @@ export default function FilterSearch(){
 
   return(
     <>
-      <div className="filter__search">
+      <div className='filter__search' ref={containerRef}>
         {
           location.pathname === '/favorites' 
-          ? (<input type="text" value={searchTermF} onChange={e => setSearchTermF(e.target.value)} placeholder="Search..." />)
-          : (<input type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Search..." />)
+          ? (<input className={`search-input ${searchOpen ? 'open' : ''}`} type="text" value={searchTermF} onChange={e => setSearchTermF(e.target.value)} placeholder="Введите название фильма" />)
+          : (<input className={`search-input ${searchOpen ? 'open' : ''}`} type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Введите название фильма" />)
         }
-          <button>
-              <i className="fa fa-search"></i>
-          </button>
+        <i onClick={toggleSearch} className="fa fa-search"></i>
       </div>
     </>
   )

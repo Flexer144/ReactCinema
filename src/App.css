@@ -13,6 +13,9 @@ html::-webkit-scrollbar-thumb {
               #929292 0%, 
               #4d4d4d 150%);
 }
+li{
+  list-style: none;
+}
 
 .app-container {
   position: relative;
@@ -25,13 +28,17 @@ header {
   right: 0;
   padding: 22px 80px;
   display: flex;
+  transform: translateY(0);
+  opacity: 1;
   align-items: center;
   justify-content: space-between;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.6s ease;
   z-index: 50;
 }
 .header--hidden {
   transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 .anchor {
   scroll-margin-top: 80px;
@@ -66,11 +73,13 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  position: relative;
   gap: 45px;
 }
 .header__navbar-flex > a {
   color: #ffffff;
   text-decoration: none;
+  list-style: none;
   font-family: "Inter", sans-serif;
   font-size: 20px;
   font-weight: 700;
@@ -109,6 +118,50 @@ header {
   color: #fff;
   font-family: "Inter", sans-serif;
 }
+
+.fa-search{
+  color: #8d8d8d;
+  font-size: 25px;
+  transition: all .5s;
+  cursor: pointer;
+}
+.fa-search:hover{
+  color: #ffffff;
+}
+
+.filter__search {
+  display: flex;
+  align-items: center;
+  width: 25px;
+}
+.search-input {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  flex: 1;
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+  padding: 0 0px;
+  max-height: 0;
+  font-size: 16px;
+  background-color: #fff;
+  color: #222;
+  overflow: hidden;
+}
+
+.search-input.open {
+  opacity: 1;
+  visibility: visible;
+  padding: 10px 10px 10px 15px;
+  max-height: 40px; /* или нужная высота */
+  position: absolute;
+  left: 0;
+  z-index: 100;
+  width: 600px;
+  transition: opacity 0.5s ease, max-height 0.5s ease, padding 0.5s ease;
+}
+
 .header__banner {
   display: flex;
   width: 100%;
@@ -294,39 +347,6 @@ header {
 }
 
 
-.filter__search {
-  display: flex;
-  align-items: center;
-  border: 0;
-  border-left: 30px;
-  border-right: 0px;
-  width: 20%;
-}
-.filter__search > input {
-  border: none;
-  outline: none;
-  flex: 1;
-  padding: 8px 10px;
-  font-size: 16px;
-  background-color: #222127;
-  border-top-left-radius: 10px;
-  color: #fff;
-  border-bottom-left-radius: 10px;
-  border-right: 0px;
-}
-.filter__search > button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 8px 10px;
-  background-color: #222127;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-.filter__search > button > i {
-  font-size: 17px;
-  color: #fff;
-}
 .movies {
   margin-top: 25px;
   width: 100%;
@@ -1282,6 +1302,13 @@ body{
   font-family: "Inter", sans-serif;
 }
 
+
+
+
+
+
+
+
 /* Медиа для адаптива */
 @media screen and (max-width: 1111px) {
   .header__navbar-flex,
@@ -1341,9 +1368,7 @@ body{
     color: white;
     font-size: 27px;
   }
-  .filter__search {
-    width: 100%;
-  }
+
   .movies {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(187px, auto));
