@@ -3,12 +3,12 @@ import star from '../../assets/icons/star.png'
 import {Link} from "react-router-dom"
 import { useState } from 'react'
 import { postAddFavorite } from '../../Redux/slices/favoriteSlice'
+import AddFavorite from '../Favorites/AddFavorite'
 
 export default function SearchMovieCard(value){
     const [isLike, setIsLike] = useState(false)
     const dispatch = useDispatch()
     const favoriteMovie = useSelector(store => store.favorite.favoriteMovie)
-console.log(value)
     const isLiked = Array.isArray(favoriteMovie) && favoriteMovie.some(f => f.id === value.id);
 
     let ratingColor
@@ -36,12 +36,9 @@ console.log(value)
         {/* любые кнопки, метаданные и т.д. */}
     </div>
 
-    <button className="favorite-add-search" onClick={()=>dispatch(postAddFavorite(value))}>
-        { isLiked
-        ? (<img width="30" height="30" src="https://img.icons8.com/ios-filled/50/FA5252/like--v1.png" alt="liked"/>)
-        : (<img width="30" height="30" src="https://img.icons8.com/ios/50/FFFFFF/like--v1.png" alt="like"/>)
-        }
-    </button>
+    <div className="button-add-favorit__search">
+        <AddFavorite {...value}/>
+    </div>
     </div>
   )
 }

@@ -17,13 +17,12 @@ export default function FilterSearch(bul){
     document.dispatchEvent(new CustomEvent('search-open-change', { detail: { open } }));
   };
 
+  useEffect(() => {
+  emitOpenEvent(searchOpen);
+  }, [searchOpen]);
+
   const toggleSearch = () => {
-    setSearchOpen(prev => {
-      const next = !prev;
-      // эмитим событие сразу (можно и в useEffect, но тут проще)
-      emitOpenEvent(next);
-      return next;
-    });
+    setSearchOpen(prev => !prev);
   };
 
   useEffect(() => {

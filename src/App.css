@@ -31,14 +31,14 @@ body{
 
 @font-face {
   font-family: 'Yandex Sans Display';
-  src: url('../public/yandex-sans/YandexSansDisplay-Regular.woff2') format('woff2');
+  src: url('/yandex-sans/YandexSansDisplay-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Yandex Sans Display';
-  src: url('../public/yandex-sans/YandexSansDisplay-Bold.woff2') format('woff2');
+  src: url('/yandex-sans/YandexSansDisplay-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
@@ -106,6 +106,15 @@ header::before {
 .header__logo-flex > img {
   display: block;
   width: 38px;
+  height: auto;
+  animation: spin 20s linear infinite;
+}
+@keyframes spin{
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce){
+  .loopbox img{ animation: none; }
 }
 .header__logo-flex_sitename {
   display: flex;
@@ -139,11 +148,10 @@ header::before {
   font-family: "Inter", sans-serif;
   font-size: 20px;
   font-weight: 700;
-  color: #8d8d8d;
   transition: color 0.3s;
 }
 .header__navbar-flex > a:hover {
-  color: #ffffff;
+  color: #a7a7a7;
 }
 .favorites__movies {
   display: flex;
@@ -196,13 +204,13 @@ header::before {
 
 
 .fa-search{
-  color: #8d8d8d;
+  color: #ffffff;
   font-size: 25px;
   transition: all .5s;
   cursor: pointer;
 }
 .fa-search:hover{
-  color: #ffffff;
+  color: #8d8d8d;
 }
 
 .filter__search {
@@ -245,18 +253,20 @@ header::before {
   pointer-events: none;
   transition: opacity .18s ease, transform .18s ease, max-height .25s ease;
   will-change: opacity, transform;
-  z-index: 999;   
+  z-index: 101;   
   border-radius: 10px;
 }
 .show-filtered-movie__container.open {
   opacity: 1;
   transform: translateY(0);
-  max-height: 70vh;     
+  max-height: 80vh;     
   pointer-events: auto;
+  z-index: 99;
+  box-shadow: 0 0 100px 85px rgba(0, 0, 0, 0.7);
 }
 .show-filtered-movie {
   width: 100%;
-  max-height: 70vh;
+  max-height: 80vh;
   overflow-y: auto; 
   height: auto;
   background-color: white;
@@ -275,60 +285,150 @@ header::before {
 }
 
 .header__banner {
-  display: flex;
+  position: relative;
   width: 100%;
   height: 100vh;
-  position: relative;
-  align-items: center;
 }
-.header__banner > img {
+.banner-img {
   display: block;
   position: absolute;
   width: 100%;
   object-fit: cover;
   height: 100%;
-  opacity: 0.72;
+  opacity: 0.5;
+  z-index: -1;
 }
-.header__banner > img:last-child {
+/* .header__banner > img:last-child {
   opacity: 0.52;
-}
+} */
 .banner-button{
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 120px;
+  width: 100%;
+}
+.banner-info-text{
+  display: flex;
   flex-direction: column;
-  position: absolute;
-  z-index: 1;
-  max-width: 804px;
-  margin-left: 80px;
-  bottom: 150px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
 }
-
-.header__banner > div > p:first-child {
-  font-size: 96px;
-  font-weight: bold;
-  color: #fff;
-  font-family: "Inter", sans-serif;
+.banner-title {
+  font-size: 80px;
+  font-family: 'Yandex Sans Display', sans-serif;
+  font-weight: 700;
+  color: white;
+  max-width: 1000px;
+  line-height: 1;
+  text-align: center;
 }
-.header__banner > div > p:last-of-type {
-  font-size: 24px;
+.banner-description {
+  font-size: 22px;
   max-width: 700px;
   font-weight: medium;
-  color: #fff;
+  color: #e2e2e2;
+  text-align: center;
+  margin-top: 15px;
   font-family: "Inter", sans-serif;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
-.header__banner > div {
+/* .header__banner > div {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 27px;
   margin-top: 26px;
-}
+} */
 .play-img{
   position: absolute;
   left: 30px;
   bottom: 20px;
   z-index: 10;
 }
-.favorites-button > button {
+
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 80px;
+  height: 80px;
+  border-radius: 0;
+  color: #fff;
+  top: 50% !important;      
+  transform: translateY(-80%) !important; 
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: "" !important;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 55% 55%;
+}
+.swiper-button-next::after {
+  content: "" !important;
+  display: block;
+  width: 500%;
+  height: 500%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 300% 300%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polyline points='9,4 14,12 9,20' fill='none' stroke='%23cccc' stroke-width='1' stroke-linecap='square' stroke-linejoin='miter'/></svg>");
+  transition: all 0.2s;
+}
+.swiper-button-prev::after {
+  content: "" !important;
+  display: block;
+  width: 500%;
+  height: 500%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 300% 300%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polyline points='14,4 9,12 14,20' fill='none' stroke='%23cccc' stroke-width='1' stroke-linecap='square' stroke-linejoin='miter'/></svg>");
+  transition: all 0.2s;
+}
+.swiper-button-prev:hover::after{
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polyline points='14,4 9,12 14,20' fill='none' stroke='%23ffff' stroke-width='1' stroke-linecap='square' stroke-linejoin='miter'/></svg>");
+}
+.swiper-button-next:hover::after{
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><polyline points='9,4 14,12 9,20' fill='none' stroke='%23ffff' stroke-width='1' stroke-linecap='square' stroke-linejoin='miter'/></svg>");
+}
+:root {
+  --swiper-navigation-sides-offset: 28px;
+}
+/* ПАГИНАЦИЯ */
+.swiper-pagination {
+  bottom: 30px !important;  /* расстояние снизу */
+}
+
+.swiper-pagination-bullet {
+  background: #aaa !important;
+  opacity: 1;
+  width: 10px;
+  height: 10px;
+  margin: 0 6px !important;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: #e9e9e9 !important; /* золотой */
+  transform: scale(1.6);
+}
+
+
+.favorites-button{
   display: block;
   padding: 20px 42px 20px 68px;
   background-color: #000000;
@@ -338,29 +438,43 @@ header::before {
   color: #fff;
   font-weight: 700;
   font-size: 19px;
+  transition: all 0.2s;
+  margin-right: 10px;
 }
-.header__banner > div > .movies-button {
+.favorites-button:hover{
+  transform: scale(1.05);
+}
+.movies-button {
   display: block;
   padding: 20px 52px 20px 52px;
   background-color: #222127;
   border-radius: 49px;
   border: 0px;
   cursor: pointer;
-  color: #fff;
+  color: #ffffff;
   font-size: 19px;
   font-family: "Inter", sans-serif;
   font-weight: 700;
   text-decoration: none;
+  transition: all 0.2s;
+  margin-right: 10px;
 }
-.header__banner > div > .movies-button:hover {
-  transition: 0.2s ease;
+.movies-button:hover {
+  transform: scale(1.05);
   background-color: #3b3b3b;
 }
 .header__banner > div > button:hover {
   transition: 0.2s ease;
   background-color: #141414;
 }
-.favorites-button >  button:last-of-type {
+.button-play{
+  background: none;
+  border: none;
+  color: white;
+  font-size: 19px;
+  font-weight: 700;
+}
+.favorites-button{
   background: linear-gradient(45deg, 
               #fa8f15 0%, 
               #dd2476 150%, 
@@ -370,7 +484,7 @@ header::before {
   cursor: pointer;
   transition: transform 0.25s;
 }
-.favorites-button > button:last-of-type::before {
+.favorites-button::before {
   content: '';
   position: absolute;
   top: 0;
@@ -383,8 +497,17 @@ header::before {
               transparent);
   transition: 0.5s;
 }
-.favorites-button > button:last-of-type:hover::before {
+.favorites-button:hover::before {
   left: 100%;
+}
+.gradient__overlay-main-banner{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%; 
+  z-index: -1;
+  background: linear-gradient(to top, rgb(0 0 0), rgba(0, 0, 0, 0))
 }
 
 .container {
@@ -490,14 +613,12 @@ header::before {
   flex: 0 0 130px;
 }
 .movie-info {
-  flex: 1 1 auto;               /* занимает остаток строки */
-               /* чтобы текст переносился корректно */
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;      /* или flex-start по вкусу */
+  justify-content: center;
 }
 
-/* пример базовой стилизации для текста */
 .movie-title {
   margin: 0 0 8px 0;
   font-size: 30px;
@@ -741,7 +862,7 @@ header::before {
   left: 0;
   right: 0;
   height: 30%; 
-  z-index: 2;
+  z-index: 1;
   background: linear-gradient(to top, rgb(0 0 0), rgba(0, 0, 0, 0))
 }
 
@@ -988,6 +1109,7 @@ main > video {
   z-index: 10;
   margin-top: 170px;
 }
+
 .play-cinema{
   display: inline-block;
   color: white;
@@ -1063,10 +1185,6 @@ main > video {
   transition: all 0.25s;
 }
 .favorite-add-search {
-  position: absolute;
-  top: 50%;
-  left: 80px;                  /* сдвинуть от левой границы, можно подогнать */
-  transform: translate(-50%, -50%) scale(1);
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -1074,26 +1192,37 @@ main > video {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #222127;
+  cursor: pointer; 
+  transition: all 0.2s;
+}
+.favorite-add-search:hover{
   background-color: #2e2f30;
-  cursor: pointer;
-  opacity: 0;                   /* по-прежнему показываем при hover */
-  pointer-events: none;
-  transition: opacity .18s ease, transform .18s ease;
+  transform: scale(1.05);
+}
+.button-add-favorit__search{
+  position: absolute;
+  top: 50%;
+  left: 80px;  
   z-index: 50;
+  opacity: 0;      
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity .18s ease, transform .18s ease;
 }
 
 .movie-wrapper:hover .shadov-movie,
-.movie-wrapper:hover .favorite-add-search {
+.movie-wrapper:hover .button-add-favorit__search {
   opacity: 1;
 }
 
-.movie-wrapper:hover .favorite-add-search,
-.favorite-add-search:hover {
+.movie-wrapper:hover .button-add-favorit__search,
+.button-add-favorit__search:hover {
   pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
 }
 
-.favorite-add-search:active { transform: translate(-50%, -50%) scale(.95); }
+.button-add-favorit__search:active { transform: translate(-50%, -50%) scale(.95); }
 .favorite-add > img{
   position: relative;
   top: 2px;
