@@ -11,7 +11,7 @@ export default function MoviesList(){
   const location = useLocation()
   const {films, status, filteredMovie, filteredMovieByCategory} = useSelector((state)=>state.movies)
   const {favoriteMovie, filteredFavoriteMovie} = useSelector((state)=> state.favorite)
-
+  console.log(films)
   return(
     <div id="movies" className="movies anchor">
       {

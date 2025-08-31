@@ -1,23 +1,19 @@
-import star from '../../assets/icons/star.png'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
-export default function MoviesCard(value){
-  let ratingColor
-    if(value.rating <= 6){
-        ratingColor = 'red-rating'
-    } else if(value.rating > 6 && value.rating <= 8.5){
-        ratingColor = 'green-rating'
-    } else if(value.rating >= 8.5){
-        ratingColor = 'legend-rating'
-    }
-  return(
-    <Link className="movies__card" to={`/movie/${value.id}`}>
-      <div className='div__movie-card-image'>
+export default function MoviesCard({ id, rating, cardImageUrl }) {
+  let ratingColor = "";
+  if (rating <= 6) ratingColor = "red-rating";
+  else if (rating > 6 && rating <= 8.5) ratingColor = "green-rating";
+  else if (rating >= 8.5) ratingColor = "legend-rating";
+
+  return (
+    <Link className="movies__card" to={`/movie/${id}`}>
+      <div className="div__movie-card-image">
         <div className={`movies__card-rating ${ratingColor}`}>
-          {value.rating}
+          {rating}
         </div>
-        <img src={value.cardImageUrl} className='movie-img' alt="" />
-    </div>
+        <img src={cardImageUrl} className="movie-img" alt="" />
+      </div>
     </Link>
-  )
+  );
 }
