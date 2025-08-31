@@ -26,7 +26,6 @@ export default function Movie(){
 
   return(
     <>
-      <main>
         <div className="image-wrapper">
           {
             searchFilm.status === 'loading' ? (<p>Loading...</p>) : (
@@ -34,7 +33,7 @@ export default function Movie(){
               
           }
         </div>
-        <div className="gradient__overlay-movie"></div>
+      <main>
         <div className="main__info">
             {
               searchFilm.status === 'loading'

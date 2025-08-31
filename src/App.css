@@ -979,8 +979,7 @@ main {
   min-height: auto;
   height: auto;
   margin: 0 auto;
-  max-width: 1700px;
-  padding: 0 30px;
+  padding: 0 82px;
   align-items: center;
 
   position: relative;
@@ -1238,11 +1237,11 @@ main > video {
 }
 
 .image-wrapper {
-  width: 1100px;
+  width: 1300px;
   box-sizing: border-box;
   order: 1;
   position: absolute;
-  right: -50px;
+  right: 0px;
   bottom: 0;
   top: 0;
   z-index: -1;
@@ -1260,8 +1259,8 @@ main > video {
   width: 100%;
   height: 100%;
   background: 
-    linear-gradient(to right, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.103) 30%),
-    linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.082) 20%);
+    linear-gradient(to right, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.103) 60%),
+    linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.082) 50%);
   pointer-events: none;
   z-index: 1;
 }
@@ -1696,9 +1695,6 @@ a {
 
 
 
-
-
-/* Медиа для адаптива */
 @media screen and (max-width: 1111px) {
   .header__navbar-flex,
   .header__auth-flex,
@@ -1756,6 +1752,9 @@ a {
   .active-category p {
     color: white;
     font-size: 27px;
+  }
+  .main{
+    padding: 0 22px;
   }
 
   .movies {
